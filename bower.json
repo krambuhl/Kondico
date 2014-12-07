@@ -1,0 +1,30 @@
+{
+  "name": "kondico",
+  "version": "0.1.0",
+  "homepage": "https://github.com/krambuhl/kondico",
+  "authors": [
+    "Evan Krambuhl <thekrambuhl@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "description": "Functional conditions and compositions.",
+  "keywords": [
+    "cond",
+    "condtions",
+    "composition"
+  ],
+  "main": "dist/kondico.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/krambuhl/kondico.git"
+  },
+  "bugs": {
+    "url": "https://github.com/krambuhl/kondico/issues"
+  }
+}
