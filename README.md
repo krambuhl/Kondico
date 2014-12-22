@@ -76,7 +76,7 @@ Kondico.composer('not', function(val) {
 
 ####Built-in Composers
 
-Composer |
+Composer | Example
 --- | ---
 not | not(true) === false
 or | or(true, false) === true
