@@ -50,7 +50,7 @@ gulp.task('compile', function() {
     .pipe(fileinclude('//='))
     .pipe(umd({
       dependencies: function() {
-        return [];
+        return ['formi'];
       }
     }))
     .pipe(gulp.dest(dir.dist))

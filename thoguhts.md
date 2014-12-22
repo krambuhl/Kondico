@@ -1,51 +1,22 @@
 Kondico
 === 
 
-Functional conditions and compositions (using [Formi](https://github.com/krambuhl/Formi)).  AKA Logic gates for formi
-
-###Status
+Functional conditions and compositions (using [Formi](https://github.com/krambuhl/Formi)).
 
 
 API
 ---
 
-- `Kondico(boolean, [options])` -> Function
-- `Kondico(func, [options])` -> Function
-- `Kondico(composer, args..., [options])` -> Function
+- Kondico(instance) -> Function
+- Kondico(boolean, [options]) -> Function
+- Kondico(func, [options]) -> Function
+- Kondico(composer, args..., [options]) -> Function
 
 Static Methods
 ---
 
-- `Kondico.composer(name)`
-- `Kondico.composer(name, function)`
-
----
 
 
-Kondico exposes the `Kondico` function.
-
-###Kondico(boolean, [options])
-
-__Example__
-
-```js
-var isTrue = Kondico(true);
-isTrue(); // ==> true
-```
-
-###Kondico(func, [options])
-
-__Example__
-
-```js
-var isDefined = Kondico(function(val) { return val !== undefined;  }); 
-isDefined(640) // true
-isDefined(undefined) // false
-```
-
-
-Example Useages
----
 
 ####Media Queries
 ```js
@@ -60,12 +31,18 @@ var mediumSize = Kondico.not(Kondico.or(smallSize, largeSize));
 smallSize(window.innerWidth) // false
 mediumSize(window.innerWidth) // true
 largeSize(window.innerWidth) // false
+
 ```
+
 
 ####Feature Detection
 ```js
+
 var hasCanvas = Kondico(function() {
     var elem = createElement('canvas');
     return !!(elem.getContext && elem.getContext('2d'));
 }, { once: true }); 
+
+
+
 ```

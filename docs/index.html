@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width" charset="utf-8">
-    <title>Kondico</title>
+    <title>Formi</title>
     <link rel="stylesheet" href="http://getbootstrap.com/2.3.2/assets/css/bootstrap.css">
     <link rel="stylesheet" href="http://getbootstrap.com/2.3.2/assets/css/bootstrap-responsive.css">
     <link rel="stylesheet" href="http://getbootstrap.com/2.3.2/assets/css/docs.css">
@@ -63,7 +63,7 @@
     </div>
     <header id="overview" class="jumbotron subhead">
       <div class="container">
-        <h1>Kondico</h1>
+        <h1>Formi</h1>
         <p class="lead"></p>
       </div>
     </header>
@@ -82,7 +82,27 @@
         </div>
         <div class="span9">
           <section id="Main"><h1>Kondico</h1>
-<p>Functional conditions and compositions.</p><h2>API</h2>
+<p>Functional conditions and compositions (using <a href="https://github.com/krambuhl/Formi">Formi</a>).</p><h2>API</h2>
+<p>Kondico(instance) -&gt; Function<br />Kondico(boolean, [options]) -&gt; Function<br />Kondico(func, [options]) -&gt; Function<br />Kondico(composer, args..., [options]) -&gt; Function</p><h4>Media Queries</h4>
+<pre><code class="lang-js">var smallSize = Kondico(function(val) { return val &lt; 720;  }); 
+var largeSize = Kondico(function(val) { return val &gt; 1280; });
+
+// logically the same (nor is faster internally)
+var mediumSize = Kondico(&#39;nor&#39;, smallSize, largeSize);
+var mediumSize = Kondico.not(Kondico.or(smallSize, largeSize));
+
+// example window size (960x720)
+smallSize(window.innerWidth) // false
+mediumSize(window.innerWidth) // true
+largeSize(window.innerWidth) // false
+</code></pre>
+<h4>Feature Detection</h4>
+<pre><code class="lang-js">
+var hasCanvas = Kondico(function() {
+    var elem = createElement(&#39;canvas&#39;);
+    return !!(elem.getContext &amp;&amp; elem.getContext(&#39;2d&#39;));
+}, { once: true });
+</code></pre>
 </section>
         </div>
       </div>

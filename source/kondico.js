@@ -3,12 +3,13 @@
 //=include("./utilities.js")
 
 /**
- * Kondico
+ * __Kondico(func)__
  *
- * Creates and sets up a state machines
+ * Constructor that creates a new 
+ * state machines instance
  * 
- * @param   {Object}    Options
- * @param   {Instance}  Kondico Instance
+ * @param   {String}    Composer method
+ * @param   {Func}      
  * @return  {Kondico}     Kondico state machine
  */
 

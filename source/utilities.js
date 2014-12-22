@@ -1,21 +1,32 @@
 /**
- * Utilities
+ * __slice(args, offset)__
  *
- * Defines global utility functions
+ * Converts arguments to array
  *
+ * @param   {Array}  Arguments
+ * @param   {Integer}  Begin 
+ * @param   {Integer}  End 
+ * @return  {Array} Array
  */
 
-var Utl = {};
-
+function slice(args, begin, end) {
+  return Array.prototype.slice.call(args, begin, end);
+}
 
 /**
- * Utilities.def
+ * __construct__
  *
- * Returns first non-undefined argument
- * 
- * @return  {Value} 
+ * Constructs new instance with a variable number of arguments
+ *
+ * @param  {Function}  Constructor
+ * @param  {Array} Arguments
+ * @return {Instance} Instance
  */
 
-Utl.def = function() {
-  return _.find(arguments);
-};
+function construct(ctor, args) {
+  function F() {
+    return ctor.apply(this, args);
+  }
+  F.prototype = ctor.prototype;
+  return new F();
+}
