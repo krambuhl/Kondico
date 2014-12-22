@@ -33,6 +33,13 @@ var isTrue = Kondico(true);
 isTrue(); // ==> true
 ```
 
+__Options__
+
+Option | Description
+--- | ---
+once | Only run function body once, cache result
+cache | Only run function body once per input value
+
 ###Kondico(func, [options])
 
 __Example__
@@ -42,6 +49,55 @@ var isDefined = Kondico(function(val) { return val !== undefined;  });
 isDefined(640) // true
 isDefined(undefined) // false
 ```
+
+###Kondico(composer, funcs..., [options])
+
+__Example__
+
+```js
+var not = function(val) { return !val; };
+var isUndefined = function(val) { return val === undefined;  };
+var isDefined = Kondico(not, isUndefined);
+
+isDefined(640) // true
+isDefined(undefined) // false
+```
+
+
+###Kondico.composer(name, func)
+
+__Example__
+
+```js
+Kondico.composer('not', function(val) {
+    return !val;
+});
+```
+
+####Built-in Composers
+
+Composer |
+--- | ---
+not | not(true) === false
+or | or(true, false) === true
+and | and(true, false) === false
+nor | nor(false, false) === true
+nand | nand(true, true) === false
+xor | xor(true, true) === false
+xnor | xand(true, true) === true
+
+###Kondico.composer(name)
+
+__Example__
+
+```js
+Kondico.composer('not')(true); // false
+
+// can then be called by string in compositions
+var isUndefined = function(val) { return val === undefined;  };
+var isDefined = Kondico('not', isUndefined);
+```
+
 
 
 Example Useages
