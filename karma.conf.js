@@ -14,13 +14,17 @@ module.exports = function(config) {
     },
 
     files: [
+      'test/vendor/**/*.js',
       'dist/kondico.js',
-      'test/**/*.js'
+      'test/**/*.js',
     ],
-    
-    exclude: [
-      'test/vendor/**/*'
-    ],
+
+    client: {
+      mocha: {
+        ui: 'tdd',
+        timeout: '5000'
+      }
+    },
 
     port: 9876,
     logLevel: config.LOG_INFO,

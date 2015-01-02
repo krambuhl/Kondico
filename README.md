@@ -1,30 +1,23 @@
 Kondico
 === 
 
-Functional conditions and compositions (using [Formi](https://github.com/krambuhl/Formi)).  AKA Logic gates for formi
+Functional conditions and compositions (uses [Formi](https://github.com/krambuhl/Formi)).
 
 ###Status
 
 
-API
+API Docs
 ---
-
-- `Kondico(boolean, [options])` -> Function
-- `Kondico(func, [options])` -> Function
-- `Kondico(composer, args..., [options])` -> Function
-
-Static Methods
----
-
-- `Kondico.composer(name)`
-- `Kondico.composer(name, function)`
-
----
-
 
 Kondico exposes the `Kondico` function.
 
-###Kondico(boolean, [options])
+- `Kondico(boolean, [options])` -> Function
+- `Kondico(func, [options])` -> Function
+
+
+####Kondico(boolean, [options])
+
+Defines function that returns input boolean.
 
 __Example__
 
@@ -33,14 +26,9 @@ var isTrue = Kondico(true);
 isTrue(); // ==> true
 ```
 
-__Options__
+####Kondico(func, [options])
 
-Option | Description
---- | ---
-once | Only run function body once, cache result
-cache | Only run function body once per input value
-
-###Kondico(func, [options])
+Defines function that returns result of a called function.
 
 __Example__
 
@@ -50,55 +38,63 @@ isDefined(640) // true
 isDefined(undefined) // false
 ```
 
-###Kondico(composer, funcs..., [options])
+###Kondico Options
+
+Option | Value | Description
+--- | --- | ---
+once | Boolean | Only run function body once, cache result
+memoize | Boolean/Function | Only run function body once per input value
+
+####Kondico(func, { once: true })
+
+Defines a function that runs it's body a single time, any subsequent calls will return that same value without running that function body.
 
 __Example__
 
 ```js
-var not = function(val) { return !val; };
-var isUndefined = function(val) { return val === undefined;  };
-var isDefined = Kondico(not, isUndefined);
+var hasJquery = Kondico(function() {
+    return typeof jQuery === 'function';
+}, { once: true });
 
-isDefined(640) // true
-isDefined(undefined) // false
+if (hasJquery()) {
+    $('html').addClass('has-jquery');
+    alert('has jquery: ' + hasJquery());
+}
 ```
 
+####Kondico(func, { memoize: true })
 
-###Kondico.composer(name, func)
+Defines a function that runs it's body a single time for each unique input, any subsequent calls with the same input will return the same value without running the function body.  
+
+`memoize` option can be a boolean value or a hashFunction that returns an id used to cache a functions return; hashFunction will return first argument by default.
 
 __Example__
 
 ```js
-Kondico.composer('not', function(val) {
-    return !val;
-});
+var has = Kondico(function(val) {
+    return typeof val === 'function';
+}, { memoize: true });
+
+if (has(jQuery)) {
+    $('html').addClass('has-jquery');
+    alert('has jquery: ' + has(jQuery));
+}
 ```
 
-####Built-in Composers
+##Compositions (Logic Gates)
 
-Composer | Example
---- | ---
-not | not(true) === false
-or | or(true, false) === true
-and | and(true, false) === false
-nor | nor(false, false) === true
-nand | nand(true, true) === false
-xor | xor(true, true) === false
-xnor | xand(true, true) === true
+Kondico defines logic gate function for composing more complex conditions.  All functions will operate on any number of arguments.  `not` returns an array if more than one argument is passes.
 
-###Kondico.composer(name)
-
-__Example__
-
-```js
-Kondico.composer('not')(true); // false
-
-// can then be called by string in compositions
-var isUndefined = function(val) { return val === undefined;  };
-var isDefined = Kondico('not', isUndefined);
-```
+- `Kondico.not`
+- `Kondico.or`
+- `Kondico.and`
+- `Kondico.nor`
+- `Kondico.nand`
+- `Kondico.xor`
+- `Kondico.xnor`
 
 
+---
 
 Example Useages
 ---
@@ -107,10 +103,7 @@ Example Useages
 ```js
 var smallSize = Kondico(function(val) { return val < 720;  }); 
 var largeSize = Kondico(function(val) { return val > 1280; });
-
-// logically the same (nor is faster internally)
-var mediumSize = Kondico('nor', smallSize, largeSize);
-var mediumSize = Kondico.not(Kondico.or(smallSize, largeSize));
+var mediumSize = Kondico.nor(smallSize, largeSize);
 
 // example window size (960x720)
 smallSize(window.innerWidth) // false

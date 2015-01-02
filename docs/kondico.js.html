@@ -72,6 +72,7 @@
         <div class="span3 bs-docs-sidebar">
           <ul class="nav nav-list bs-docs-sidenav affix-top">
             <li><a href="index.html">Main</a></li>
+            <li><a href="functions.js.html">functions.js</a></li>
             <li class="active"><a href="kondico.js.html">kondico.js</a></li>
             <li><a href="utilities.js.html">utilities.js</a></li>
           </ul>
@@ -112,15 +113,7 @@
             </tbody>
           </table>
           <div class="description"><p><strong>Kondico(func)</strong></p><p>Constructor that creates a new<br />state machines instance</p> </div>
-          <pre><code class="language-javascript">function Kondico(options) {
-  // dont double wrap kondico objects
-  if (method instanceof Kondico) {
-    return method;
-  } 
-
-  if (!(this instanceof Kondico)) {
-    return new Kondico(method, options);
-  }
+          <pre><code class="language-javascript">function Kondico(method, options) {
 
   // this.option(options);
 }
@@ -128,7 +121,9 @@
 
 Kondico.prototype.option = function() {
   
-};</code></pre>
+};
+
+//=include(&quot;./functions.js&quot;)</code></pre>
         </div>
       </div>
     </div>

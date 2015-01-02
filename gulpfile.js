@@ -113,7 +113,7 @@ gulp.task('build', function(done) {
 });
 
 gulp.task('develop', function(done) {
-  sequence('build', 'test', 'watch', done);
+  sequence('build', 'watch', done);
 });
 
 gulp.task('default', ['build']);

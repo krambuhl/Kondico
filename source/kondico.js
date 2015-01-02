@@ -13,15 +13,7 @@
  * @return  {Kondico}     Kondico state machine
  */
 
-function Kondico(options) {
-  // dont double wrap kondico objects
-  if (method instanceof Kondico) {
-    return method;
-  } 
-
-  if (!(this instanceof Kondico)) {
-    return new Kondico(method, options);
-  }
+function Kondico(method, options) {
 
   // this.option(options);
 }
@@ -30,3 +22,5 @@ function Kondico(options) {
 Kondico.prototype.option = function() {
   
 };
+
+//=include("./functions.js")
