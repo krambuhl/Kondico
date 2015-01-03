@@ -5,6 +5,11 @@ Functional conditions and compositions (uses [Formi](https://github.com/krambuhl
 
 ###Status
 
+[ ![Codeship Status for krambuhl/Kondico](https://codeship.com/projects/94cccd00-7494-0132-a4c0-7eda6227987e/status?branch=develop)](https://codeship.com/projects/55036)
+
+[![Code Climate](https://codeclimate.com/github/krambuhl/Kondico/badges/gpa.svg)](https://codeclimate.com/github/krambuhl/Kondico)
+
+[![Test Coverage](https://codeclimate.com/github/krambuhl/Kondico/badges/coverage.svg)](https://codeclimate.com/github/krambuhl/Kondico)
 
 API Docs
 ---
