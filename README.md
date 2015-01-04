@@ -88,7 +88,7 @@ if (has(jQuery)) {
 
 ##Compositions (Logic Gates)
 
-Kondico defines logic gate function for composing more complex conditions.  All functions will operate on any number of arguments.  `not` returns an array if more than one argument is passes.
+Kondico defines logic gate function for composing more complex conditions.  All functions will operate on any number of arguments.  `not` returns an array if more than one argument is passed.
 
 - `Kondico.not`
 - `Kondico.or`

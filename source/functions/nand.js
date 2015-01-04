@@ -1,0 +1,1 @@
+Kondico.nand = Formi.compose(Kondico.and, Kondico.not);

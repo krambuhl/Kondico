@@ -1,0 +1,1 @@
+Kondico.nor = Formi.compose(Kondico.or, Kondico.not);

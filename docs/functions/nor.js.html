@@ -71,112 +71,36 @@
       <div class="row">
         <div class="span3 bs-docs-sidebar">
           <ul class="nav nav-list bs-docs-sidenav affix-top">
-            <li class="active"><a href="index.html">Main</a></li>
-            <li><a href="functions/and.js.html">functions/and.js</a></li>
-            <li><a href="functions/nand.js.html">functions/nand.js</a></li>
-            <li><a href="functions/nor.js.html">functions/nor.js</a></li>
-            <li><a href="functions/not.js.html">functions/not.js</a></li>
-            <li><a href="functions/or.js.html">functions/or.js</a></li>
-            <li><a href="functions/xnor.js.html">functions/xnor.js</a></li>
-            <li><a href="functions/xor.js.html">functions/xor.js</a></li>
-            <li><a href="kondico.js.html">kondico.js</a></li>
-            <li><a href="memoize.js.html">memoize.js</a></li>
-            <li><a href="once.js.html">once.js</a></li>
-            <li><a href="utilities.js.html">utilities.js</a></li>
+            <li><a href="../index.html">Main</a></li>
+            <li><a href="../functions/and.js.html">functions/and.js</a></li>
+            <li><a href="../functions/nand.js.html">functions/nand.js</a></li>
+            <li class="active"><a href="../functions/nor.js.html">functions/nor.js</a></li>
+            <li><a href="../functions/not.js.html">functions/not.js</a></li>
+            <li><a href="../functions/or.js.html">functions/or.js</a></li>
+            <li><a href="../functions/xnor.js.html">functions/xnor.js</a></li>
+            <li><a href="../functions/xor.js.html">functions/xor.js</a></li>
+            <li><a href="../kondico.js.html">kondico.js</a></li>
+            <li><a href="../memoize.js.html">memoize.js</a></li>
+            <li><a href="../once.js.html">once.js</a></li>
+            <li><a href="../utilities.js.html">utilities.js</a></li>
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
+              <li><a href="#nor"><i class="alert alert-success"></i><span>nor</span></a>
+              </li>
             </ul>
           </div>
         </div>
         <div class="span9">
-          <section id="Main"><h1>Kondico</h1>
-<p>Functional conditions and compositions (uses <a href="https://github.com/krambuhl/Formi">Formi</a>).</p><h3>Status</h3>
-<p><a href="https://codeship.com/projects/55036"> <img src="https://codeship.com/projects/94cccd00-7494-0132-a4c0-7eda6227987e/status?branch=develop" alt="Codeship Status for krambuhl/Kondico"></a></p><p><a href="https://codeclimate.com/github/krambuhl/Kondico"><img src="https://codeclimate.com/github/krambuhl/Kondico/badges/gpa.svg" alt="Code Climate"></a></p><p><a href="https://codeclimate.com/github/krambuhl/Kondico"><img src="https://codeclimate.com/github/krambuhl/Kondico/badges/coverage.svg" alt="Test Coverage"></a></p><h2>API Docs</h2>
-<p>Kondico exposes the <code>Kondico</code> function.</p><ul>
-<li><code>Kondico(boolean, [options])</code> -&gt; Function</li>
-<li><code>Kondico(func, [options])</code> -&gt; Function</li>
-</ul>
-<h4>Kondico(boolean, [options])</h4>
-<p>Defines function that returns input boolean.</p><p><strong>Example</strong></p><pre><code class="lang-js">var isTrue = Kondico(true);
-isTrue(); // ==&gt; true
-</code></pre>
-<h4>Kondico(func, [options])</h4>
-<p>Defines function that returns result of a called function.</p><p><strong>Example</strong></p><pre><code class="lang-js">var isDefined = Kondico(function(val) { return val !== undefined;  }); 
-isDefined(640) // true
-isDefined(undefined) // false
-</code></pre>
-<h3>Kondico Options</h3>
-<table>
-<thead>
-<tr>
-<th>Option</th>
-<th>Value</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>once</td>
-<td>Boolean</td>
-<td>Only run function body once, cache result</td>
-</tr>
-<tr>
-<td>memoize</td>
-<td>Boolean/Function</td>
-<td>Only run function body once per input value</td>
-</tr>
-</tbody>
-</table>
-<h4>Kondico(func, { once: true })</h4>
-<p>Defines a function that runs it&#39;s body a single time, any subsequent calls will return that same value without running that function body.</p><p><strong>Example</strong></p><pre><code class="lang-js">var hasJquery = Kondico(function() {
-    return typeof jQuery === &#39;function&#39;;
-}, { once: true });
-
-if (hasJquery()) {
-    $(&#39;html&#39;).addClass(&#39;has-jquery&#39;);
-    alert(&#39;has jquery: &#39; + hasJquery());
-}
-</code></pre>
-<h4>Kondico(func, { memoize: true })</h4>
-<p>Defines a function that runs it&#39;s body a single time for each unique input, any subsequent calls with the same input will return the same value without running the function body.  </p><p><code>memoize</code> option can be a boolean value or a hashFunction that returns an id used to cache a functions return; hashFunction will return first argument by default.</p><p><strong>Example</strong></p><pre><code class="lang-js">var has = Kondico(function(val) {
-    return typeof val === &#39;function&#39;;
-}, { memoize: true });
-
-if (has(jQuery)) {
-    $(&#39;html&#39;).addClass(&#39;has-jquery&#39;);
-    alert(&#39;has jquery: &#39; + has(jQuery));
-}
-</code></pre>
-<h2>Compositions (Logic Gates)</h2>
-<p>Kondico defines logic gate function for composing more complex conditions.  All functions will operate on any number of arguments.  <code>not</code> returns an array if more than one argument is passed.</p><ul>
-<li><code>Kondico.not</code></li>
-<li><code>Kondico.or</code></li>
-<li><code>Kondico.and</code></li>
-<li><code>Kondico.nor</code></li>
-<li><code>Kondico.nand</code></li>
-<li><code>Kondico.xor</code></li>
-<li><code>Kondico.xnor</code></li>
-</ul>
-<hr>
-<h2>Example Useages</h2>
-<h4>Media Queries</h4>
-<pre><code class="lang-js">var smallSize = Kondico(function(val) { return val &lt; 720;  }); 
-var largeSize = Kondico(function(val) { return val &gt; 1280; });
-var mediumSize = Kondico.nor(smallSize, largeSize);
-
-// example window size (960x720)
-smallSize(window.innerWidth) // false
-mediumSize(window.innerWidth) // true
-largeSize(window.innerWidth) // false
-</code></pre>
-<h4>Feature Detection</h4>
-<pre><code class="lang-js">var hasCanvas = Kondico(function() {
-    var elem = createElement(&#39;canvas&#39;);
-    return !!(elem.getContext &amp;&amp; elem.getContext(&#39;2d&#39;));
-}, { once: true });
-</code></pre>
-</section>
+          <section id="nor">
+            <h1>nor</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-success radius ctx-type">property</div><span>Kondico.nor</span>
+            </p>
+          </section>
+          <div class="description"> </div>
+          <pre><code class="language-javascript">Kondico.nor = Formi.compose(Kondico.or, Kondico.not);</code></pre>
         </div>
       </div>
     </div>

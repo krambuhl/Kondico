@@ -71,10 +71,18 @@
       <div class="row">
         <div class="span3 bs-docs-sidebar">
           <ul class="nav nav-list bs-docs-sidenav affix-top">
-            <li><a href="index.html">Main</a></li>
-            <li class="active"><a href="functions.js.html">functions.js</a></li>
-            <li><a href="kondico.js.html">kondico.js</a></li>
-            <li><a href="utilities.js.html">utilities.js</a></li>
+            <li><a href="../index.html">Main</a></li>
+            <li><a href="../functions/and.js.html">functions/and.js</a></li>
+            <li><a href="../functions/nand.js.html">functions/nand.js</a></li>
+            <li><a href="../functions/nor.js.html">functions/nor.js</a></li>
+            <li class="active"><a href="../functions/not.js.html">functions/not.js</a></li>
+            <li><a href="../functions/or.js.html">functions/or.js</a></li>
+            <li><a href="../functions/xnor.js.html">functions/xnor.js</a></li>
+            <li><a href="../functions/xor.js.html">functions/xor.js</a></li>
+            <li><a href="../kondico.js.html">kondico.js</a></li>
+            <li><a href="../memoize.js.html">memoize.js</a></li>
+            <li><a href="../once.js.html">once.js</a></li>
+            <li><a href="../utilities.js.html">utilities.js</a></li>
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
@@ -94,44 +102,7 @@
           <div class="description"> </div>
           <pre><code class="language-javascript">Kondico.not = Formi.map(function(val) {
   return !val;
-});
-
-Kondico.or = function() {
-  var i = 0;
-  while(arguments.length &gt; i) {
-    if (arguments[i++]) { return true; }
-  }
-  return false;
-};
-
-Kondico.and = function() {
-  var i = 0;
-  while(arguments.length &gt; i) {
-    if (!arguments[i++]) { return false; }
-  }
-  return true;
-};
-
-Kondico.nor = Formi.compose(Kondico.or, Kondico.not);
-Kondico.nand = Formi.compose(Kondico.and, Kondico.not);
-
-Kondico.xor = function() {
-  var tape = arguments[0];
-  var i = 1;
-  while (arguments.length &gt; i) {
-    tape = tape !== arguments[i++];
-  }
-  return tape;
-};
-
-Kondico.xnor = function() {
-  var tape = arguments[0];
-  var i = 1;
-  while (arguments.length &gt; i) {
-    tape = tape === arguments[i++];
-  }
-  return tape;
-};</code></pre>
+});</code></pre>
         </div>
       </div>
     </div>

@@ -48,25 +48,59 @@ function construct(ctor, args) {
  * Constructor that creates a new 
  * state machines instance
  * 
- * @param   {String}    Composer method
  * @param   {Func}      
- * @return  {Kondico}     Kondico state machine
+ * @return  {Kondico}     Kondico function
  */
 
 function Kondico(method, options) {
+  var opts = {},
+    func = method;
 
-  // this.option(options);
+  if (options !== undefined) {
+    opts = options;
+  }
+
+  if (method === undefined) {
+    func = function() { return undefined; };
+  } else if (typeof method !== 'function') {
+    func = function() { return method; };
+  }
+
+  if (opts.once) {
+    return once(func, opts);
+  }
+
+  if (opts.memoize) {
+    return memoize(func, opts.memoize, opts);
+  }
+
+  return func;
 }
 
-
-Kondico.prototype.option = function() {
+function memoize(method, hasher, options) {
+  var cache = {};
   
-};
+  if (typeof hasher !== 'function') {
+    hasher = function() { return arguments[0]; };
+  }
+
+  return function() {
+    var hash = hasher.apply(this, arguments);
+    if (cache[hash] === undefined) {
+      cache[hash] = method.apply(this, arguments);
+    } 
+    return cache[hash];
+  };
+}
+function once(method, options) {
+  return memoize.apply(this, [method, function() {
+    return 0;
+  }, options]);
+}
 
 Kondico.not = Formi.map(function(val) {
   return !val;
 });
-
 Kondico.or = function() {
   var i = 0;
   while(arguments.length > i) {
@@ -74,7 +108,6 @@ Kondico.or = function() {
   }
   return false;
 };
-
 Kondico.and = function() {
   var i = 0;
   while(arguments.length > i) {
@@ -82,10 +115,8 @@ Kondico.and = function() {
   }
   return true;
 };
-
 Kondico.nor = Formi.compose(Kondico.or, Kondico.not);
 Kondico.nand = Formi.compose(Kondico.and, Kondico.not);
-
 Kondico.xor = function() {
   var tape = arguments[0];
   var i = 1;
@@ -94,7 +125,6 @@ Kondico.xor = function() {
   }
   return tape;
 };
-
 Kondico.xnor = function() {
   var tape = arguments[0];
   var i = 1;
@@ -103,8 +133,6 @@ Kondico.xnor = function() {
   }
   return tape;
 };
-
-
 
 return Kondico;
 }));
