@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width" charset="utf-8">
-    <title>Kondico</title>
+    <title>Formi</title>
     <link rel="stylesheet" href="http://getbootstrap.com/2.3.2/assets/css/bootstrap.css">
     <link rel="stylesheet" href="http://getbootstrap.com/2.3.2/assets/css/bootstrap-responsive.css">
     <link rel="stylesheet" href="http://getbootstrap.com/2.3.2/assets/css/docs.css">
@@ -63,7 +63,7 @@
     </div>
     <header id="overview" class="jumbotron subhead">
       <div class="container">
-        <h1>Kondico</h1>
+        <h1>Formi</h1>
         <p class="lead"></p>
       </div>
     </header>
@@ -72,39 +72,101 @@
         <div class="span3 bs-docs-sidebar">
           <ul class="nav nav-list bs-docs-sidenav affix-top">
             <li><a href="index.html">Main</a></li>
+            <li><a href="functions/and.js.html">functions/and.js</a></li>
+            <li><a href="functions/nand.js.html">functions/nand.js</a></li>
+            <li><a href="functions/nor.js.html">functions/nor.js</a></li>
+            <li><a href="functions/not.js.html">functions/not.js</a></li>
+            <li><a href="functions/or.js.html">functions/or.js</a></li>
+            <li><a href="functions/xnor.js.html">functions/xnor.js</a></li>
+            <li><a href="functions/xor.js.html">functions/xor.js</a></li>
             <li><a href="kondico.js.html">kondico.js</a></li>
+            <li><a href="memoize.js.html">memoize.js</a></li>
+            <li><a href="once.js.html">once.js</a></li>
             <li class="active"><a href="utilities.js.html">utilities.js</a></li>
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
-              <li><a href="#Utl"><i class="alert alert-success"></i><span>Utl</span></a>
+              <li><a href="#slice"><i class="alert alert-info"></i><span>slice</span></a>
               </li>
-              <li><a href="#def"><i class="alert alert-info"></i><span>def</span></a>
+              <li><a href="#construct"><i class="alert alert-info"></i><span>construct</span></a>
               </li>
             </ul>
           </div>
         </div>
         <div class="span9">
-          <section id="Utl">
-            <h1>Utl</h1>
+          <section id="slice">
+            <h1>slice</h1>
             <h5 class="subheader"></h5>
             <p>
-              <div class="label label-success radius ctx-type">declaration</div><span>Utl</span>
+              <div class="label label-info radius ctx-type">function</div><span>slice()</span> -><span>Array</span>
             </p>
           </section>
-          <div class="description"><p>Utilities</p><p>Defines global utility functions</p> </div>
-          <pre><code class="language-javascript">var Utl = {};</code></pre>
-          <section id="def">
-            <h1>def</h1>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Arguments</td>
+                <td>Array</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Begin</td>
+                <td>Integer</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>End</td>
+                <td>Integer</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p><strong>slice(args, offset)</strong></p><p>Converts arguments to array</p> </div>
+          <pre><code class="language-javascript">function slice(args, begin, end) {
+  return Array.prototype.slice.call(args, begin, end);
+}</code></pre>
+          <section id="construct">
+            <h1>construct</h1>
             <h5 class="subheader"></h5>
             <p>
-              <div class="label label-info radius ctx-type">method</div><span>Utl.def()</span> -><span>Value</span>
+              <div class="label label-info radius ctx-type">function</div><span>construct()</span> -><span>Instance</span>
             </p>
           </section>
-          <div class="description"><p>Utilities.def</p><p>Returns first non-undefined argument</p> </div>
-          <pre><code class="language-javascript">Utl.def = function() {
-  return _.find(arguments);
-};</code></pre>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Constructor</td>
+                <td>Function</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Arguments</td>
+                <td>Array</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p><strong>construct</strong></p><p>Constructs new instance with a variable number of arguments</p> </div>
+          <pre><code class="language-javascript">function construct(ctor, args) {
+  function F() {
+    return ctor.apply(this, args);
+  }
+  F.prototype = ctor.prototype;
+  return new F();
+}</code></pre>
         </div>
       </div>
     </div>

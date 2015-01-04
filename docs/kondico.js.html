@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width" charset="utf-8">
-    <title>Kondico</title>
+    <title>Formi</title>
     <link rel="stylesheet" href="http://getbootstrap.com/2.3.2/assets/css/bootstrap.css">
     <link rel="stylesheet" href="http://getbootstrap.com/2.3.2/assets/css/bootstrap-responsive.css">
     <link rel="stylesheet" href="http://getbootstrap.com/2.3.2/assets/css/docs.css">
@@ -63,7 +63,7 @@
     </div>
     <header id="overview" class="jumbotron subhead">
       <div class="container">
-        <h1>Kondico</h1>
+        <h1>Formi</h1>
         <p class="lead"></p>
       </div>
     </header>
@@ -72,7 +72,16 @@
         <div class="span3 bs-docs-sidebar">
           <ul class="nav nav-list bs-docs-sidenav affix-top">
             <li><a href="index.html">Main</a></li>
+            <li><a href="functions/and.js.html">functions/and.js</a></li>
+            <li><a href="functions/nand.js.html">functions/nand.js</a></li>
+            <li><a href="functions/nor.js.html">functions/nor.js</a></li>
+            <li><a href="functions/not.js.html">functions/not.js</a></li>
+            <li><a href="functions/or.js.html">functions/or.js</a></li>
+            <li><a href="functions/xnor.js.html">functions/xnor.js</a></li>
+            <li><a href="functions/xor.js.html">functions/xor.js</a></li>
             <li class="active"><a href="kondico.js.html">kondico.js</a></li>
+            <li><a href="memoize.js.html">memoize.js</a></li>
+            <li><a href="once.js.html">once.js</a></li>
             <li><a href="utilities.js.html">utilities.js</a></li>
           </ul>
           <div class="scrollspy">
@@ -100,35 +109,48 @@
             </thead>
             <tbody>
               <tr>
-                <td>Options</td>
-                <td>Object</td>
                 <td></td>
-              </tr>
-              <tr>
-                <td>Kondico</td>
-                <td>Instance</td>
-                <td>Instance</td>
+                <td>Func</td>
+                <td></td>
               </tr>
             </tbody>
           </table>
-          <div class="description"><p>Kondico</p><p>Creates and sets up a state machines</p> </div>
-          <pre><code class="language-javascript">function Kondico(options) {
-  // dont double wrap kondico objects
-  if (method instanceof Kondico) {
-    return method;
-  } 
+          <div class="description"><p><strong>Kondico(func)</strong></p><p>Constructor that creates a new<br />state machines instance</p> </div>
+          <pre><code class="language-javascript">function Kondico(method, options) {
+  var opts = {},
+    func = method;
 
-  if (!(this instanceof Kondico)) {
-    return new Kondico(method, options);
+  if (options !== undefined) {
+    opts = options;
   }
 
-  // this.option(options);
+  if (method === undefined) {
+    func = function() { return undefined; };
+  } else if (typeof method !== 'function') {
+    func = function() { return method; };
+  }
+
+  if (opts.once) {
+    return once(func, opts);
+  }
+
+  if (opts.memoize) {
+    return memoize(func, opts.memoize, opts);
+  }
+
+  return func;
 }
 
+//=include(&quot;./memoize.js&quot;)
+//=include(&quot;./once.js&quot;)
 
-Kondico.prototype.option = function() {
-  
-};</code></pre>
+//=include(&quot;./functions/not.js&quot;)
+//=include(&quot;./functions/or.js&quot;)
+//=include(&quot;./functions/and.js&quot;)
+//=include(&quot;./functions/nor.js&quot;)
+//=include(&quot;./functions/nand.js&quot;)
+//=include(&quot;./functions/xor.js&quot;)
+//=include(&quot;./functions/xnor.js&quot;)</code></pre>
         </div>
       </div>
     </div>

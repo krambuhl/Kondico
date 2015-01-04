@@ -3,29 +3,47 @@
 //=include("./utilities.js")
 
 /**
- * Kondico
+ * __Kondico(func)__
  *
- * Creates and sets up a state machines
+ * Constructor that creates a new 
+ * state machines instance
  * 
- * @param   {Object}    Options
- * @param   {Instance}  Kondico Instance
- * @return  {Kondico}     Kondico state machine
+ * @param   {Func}      
+ * @return  {Kondico}     Kondico function
  */
 
-function Kondico(options) {
-  // dont double wrap kondico objects
-  if (method instanceof Kondico) {
-    return method;
-  } 
+function Kondico(method, options) {
+  var opts = {},
+    func = method;
 
-  if (!(this instanceof Kondico)) {
-    return new Kondico(method, options);
+  if (options !== undefined) {
+    opts = options;
   }
 
-  // this.option(options);
+  if (method === undefined) {
+    func = function() { return undefined; };
+  } else if (typeof method !== 'function') {
+    func = function() { return method; };
+  }
+
+  if (opts.once) {
+    return once(func, opts);
+  }
+
+  if (opts.memoize) {
+    return memoize(func, opts.memoize, opts);
+  }
+
+  return func;
 }
 
+//=include("./memoize.js")
+//=include("./once.js")
 
-Kondico.prototype.option = function() {
-  
-};
+//=include("./functions/not.js")
+//=include("./functions/or.js")
+//=include("./functions/and.js")
+//=include("./functions/nor.js")
+//=include("./functions/nand.js")
+//=include("./functions/xor.js")
+//=include("./functions/xnor.js")
